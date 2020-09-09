@@ -1,27 +1,26 @@
 from reader import *
 from orderPool import *
-import csv
-
-HEADEREXECU = ["Stock Code","Transaction Quantity","Transaction Price", "Transaction Side", "Account", "Transaction Reference ID", "Transaction Time"]
-HEADERORDER = ["Stock Code","Account","Total Quantity", "Transaction Side", "Transaction Reference ID", "Transaction Time"]
-
+from message import *
+from const import *
+import csv, os, sys
 
 class Wrapper():
 
-    def __init__(self):
-        self.__file = "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/FIX.09-Jan-2018.log"
+    def __init__(self, file_path, out_dir):
+        self.__file = file_path #"/Users/joanna/Desktop/jobs/OnGoing/quantifeed/FIX.09-Jan-2018.log"
         self.__reader = Reader(self.__file)
         self.__mess = {}
         self.__order_pool = OrderPool()
-        self.__customer_orders = {}
-        self.__exec = []
+        # self.__out_dir = out_dir
+        self.__out_execu = os.path.abspath(os.path.join(out_dir, EXECUFILE))
+        self.__out_order = os.path.abspath(os.path.join(out_dir, ORDERFILE))
+        self.__out_account = os.path.abspath(os.path.join(out_dir, ACCOUNTFILE))
+
 
     def start(self):
         lines = self.__reader.read_log()
-        global HEADEREXECU
-        global HEADERORDER
-        self.csv_write("execu.csv", HEADEREXECU, "w")
-        self.csv_write("orders.csv", HEADERORDER, "w")
+        self.csv_write(self.__out_execu, HEADEREXECU, "w")
+        self.csv_write(self.__out_order, HEADERORDER, "w")
         for line in lines:
             if line[0] == '#':
                 continue
@@ -29,9 +28,9 @@ class Wrapper():
             order = self.updateOrder()
             if not order is None:    
                 self.updateOrderPool(order)
-                order.setPos()
-                order.printOrder()
-
+                # order.setPos()
+                (self.__order_pool.serachOrder(order.getOrderId())).printOrder()
+        self.orderPoolOut()
             
     def updateOrder(self):
         if(self.__mess.__class__.__name__ == 'TradeMessage'):
@@ -45,16 +44,25 @@ class Wrapper():
         if(self.__mess.getExecType() == '0'):
             self.__order_pool.addOrder(order)
             print("receive order mesaage :{}".format(self.__mess.orderMessageFormat()))
-            self.csv_write("orders.csv", self.__mess.orderMessageFormat(), "a+")
+            self.csv_write(self.__out_order, self.__mess.orderMessageFormat(), "a+")
                 
             
         elif (self.__mess.getExecType() == 'F'):
             self.__order_pool.updateOrder(order)
             print("execu order message :{}".format(self.__mess.execMessageFormat()))
-            self.csv_write("execu.csv", self.__mess.execMessageFormat(), "a+")
+            self.csv_write(self.__out_execu, self.__mess.execMessageFormat(), "a+")
+
+    def orderPoolOut(self):
+        rows = self.__order_pool.orderPos()
+        self.csv_write(self.__out_account, [], "w")
+        for row in rows:
+            self.csv_write(self.__out_account, row, "a+")
                 
 
     def csv_write(self, filepath, row, writer):
         with open(filepath, writer) as csvfile: 
             writer = csv.writer(csvfile)
             writer.writerow(row)
+
+    def outDir(self):
+        print(sys.path[0])

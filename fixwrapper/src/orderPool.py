@@ -13,6 +13,7 @@ class OrderPool():
     def addOrder(self, order):
         order_locate = self.serachOrder(order.getOrderId())
         if not order_locate:
+            order.setPos()
             self.__orders[order.getOrderId()] = order
         else:
             print("Error orderId, not unique")
@@ -20,11 +21,23 @@ class OrderPool():
     def updateOrder(self, order):
         order_locate = self.serachOrder(order.getOrderId())
         if order_locate:
-            if(order_locate.getQty() > order.getLeftQty()):
+            if(order_locate.getLeftQty() < order.getQty()):
                 print("Error Qty, larger than left quantity")
                 return
             order_locate.setAverPrice(order.getAverPrice())
-            order_locate.setCumQty(order.getCumQty())
+            order_locate.setPrice(order.getPrice())
+            order_locate.setCumQty(order.getQty() + order_locate.getCumQty())
             order_locate.setLeftQty(order.getLeftQty())
+            order_locate.setQty(order.getQty())
+            order_locate.setPos()
             self.__orders[order.getOrderId()] = order_locate
+
+    def orderPos(self):
+        order_rows = []
+        for order_id in self.__orders:
+            if len(order_rows) == 0:
+                order_rows.append(self.__orders[order_id].orderHead())
+            order_rows.append(self.__orders[order_id].orderValue())
+        return order_rows
+
 

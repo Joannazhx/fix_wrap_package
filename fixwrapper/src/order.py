@@ -73,10 +73,13 @@ class Order():
             names.append(name)
         return names
 
+    def orderValue(self):
+        return [self.getOrderId(), self.getAccountNum(), self.getCode(), self.getQty(),
+            self.getLeftQty(), self.getCumQty(), self.getAverPrice(),  self.getPrice(), self.getSide(), self.getPos()]
+
     def printOrder(self):
         headers = self.orderHead()
-        out_values = [self.getOrderId(), self.getAccountNum(), self.getCode(), self.getQty(),
-            self.getLeftQty(), self.getCumQty(), self.getAverPrice(),  self.getPrice(), self.getSide(), self.getPos()]
+        out_values = self.orderValue()
         out_str = ""
         for i in range(len(headers)):
             out_str += ( headers[i] + " : " + str(out_values[i]) + " | ")
