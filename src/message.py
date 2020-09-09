@@ -2,9 +2,6 @@ import re
 
 class Header():
 
-    def __init__(self):
-        super().__init__()
-
     def __init__(self, begin_string, body_length, msg_type, msg_seq_num, target_comp_id, sending_time):
         self.__begin_string = begin_string# = mess['8']
         self.__body_length = body_length # = mess['9']
