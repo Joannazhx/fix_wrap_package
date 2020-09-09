@@ -23,7 +23,7 @@ class Reader():
         check_sum = mess['10']
         t = Trailer(check_sum)
         if msg_type == '0' or msg_type == '5':
-            #heartbeat / logout
+            # heartbeat / logout
             return Message(h, t)
         elif msg_type == 'A':
             # logon
@@ -35,12 +35,19 @@ class Reader():
             price = int(mess['31'])
             qty = int(mess['32'])
             side = mess['54']
+            if side == '1':
+                side = "buy"
+            elif side == '2':
+                side = "sell"
             code = str(mess['55'])
-            print(code)
             time = mess['60']
             exec_type = mess['150']
             order_id = mess['11']
-            return TradeMessage(h, t, account, price, qty, side, code, time, exec_type, order_id)
+            aver_price = mess['6']
+            left_qty = int(mess['151'])
+            sum_qty = int(mess['14'])
+            return TradeMessage(h, t, account, price, qty, side, code, 
+                            time, exec_type, order_id, aver_price, left_qty, sum_qty)
 
 
     def read_line(self, line):
