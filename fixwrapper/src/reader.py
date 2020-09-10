@@ -32,13 +32,9 @@ class Reader():
         else:
             #trade
             account = mess['1']
-            price = int(mess['31'])
+            price = mess['31']
             qty = int(mess['32'])
             side = mess['54']
-            if side == '1':
-                side = "buy"
-            elif side == '2':
-                side = "sell"
             code = str(mess['55'])
             time = mess['60']
             exec_type = mess['150']

@@ -84,13 +84,19 @@ class LogOnMessage(Message):
         return self.__reset_seq_num_flag 
 
 class TradeMessage(Message):
+
     def __init__(self, header, trailer, account, price, quantity, side, code, 
                     time, exec_type, order_id, aver_price, left_qty, sum_qty):
         super().__init__(header, trailer)
         self.__account = account
         self.__price = price
         self.__quantity = quantity
-        self.__side = side
+        if side == '1':
+            self.__side = "buy"
+        elif side == '2':
+            self.__side = "sell"
+        else:
+            self.__side = side
         self.__code = re.sub('^', r"\t", code) # save start '0' in csv file
         self.__time = time
         self.__exec_type = exec_type
@@ -120,6 +126,9 @@ class TradeMessage(Message):
     def getOrderId(self):
         return self.__order_id
 
+    def setOrderId(self, order_id):
+        self.__order_id = order_id
+
     def setExecType(self, exec_type):
         self.__exec_type = exec_type
     
@@ -136,7 +145,12 @@ class TradeMessage(Message):
         self.__quantity = quantity
     
     def setSide(self, side):
-        self.__side = side
+        if side == '1':
+            self.__side = "buy"
+        elif side == '2':
+            self.__side = "sell"
+        else:
+            self.__side = side
     
     def setCode(self, code):
         self.__code = code
