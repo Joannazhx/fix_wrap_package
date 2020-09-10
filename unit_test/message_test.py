@@ -94,3 +94,9 @@ class TestMessage(unittest.TestCase):
         self.assertEqual('25', self.execu_order_msg.getAverPrice())
         self.assertEqual(50, self.execu_order_msg.getLeftQty())
         self.assertEqual(50, self.execu_order_msg.getSumQty())
+
+    def test_order_message_format(self):
+        self.assertEqual(['\t0700', 'TEST1234', 100, 'buy', 'QO37NA54U3C8NTYKHDT15N4_0', '20180109-07:01:01'], self.new_order_msg.orderMessageFormat())
+
+    def test_exec_message_format(self):
+        self.assertEqual(['\t0700', 'TEST1234', 50, 'buy', 'QO37NA54U3C8NTYKHDT15N4_0', '20180109-07:01:01'], self.execu_order_msg.orderMessageFormat())
