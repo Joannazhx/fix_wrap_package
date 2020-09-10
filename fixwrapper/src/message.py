@@ -63,6 +63,12 @@ class Message():
         self.__header = header
         self.__trailer = trailer
     
+    def getHeader(self):
+        return self.__header
+
+    def getTrailer(self):
+        return self.__trailer
+    
 
 class LogOnMessage(Message):
 

@@ -1,3 +1,6 @@
+import os, sys
+path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(path)
 from order import *
 
 class OrderPool():
@@ -17,13 +20,14 @@ class OrderPool():
             self.__orders[order.getOrderId()] = order
         else:
             print("Error orderId, not unique")
+            pass
 
     def updateOrder(self, order):
         order_locate = self.serachOrder(order.getOrderId())
         if order_locate:
             if(order_locate.getLeftQty() < order.getQty()):
                 print("Error Qty, larger than left quantity")
-                return
+                return False
             order_locate.setAverPrice(order.getAverPrice())
             order_locate.setPrice(order.getPrice())
             order_locate.setCumQty(order.getQty() + order_locate.getCumQty())
@@ -32,7 +36,7 @@ class OrderPool():
             order_locate.setPos()
             self.__orders[order.getOrderId()] = order_locate
 
-    def orderPos(self):
+    def acctPos(self):
         order_rows = []
         for order_id in self.__orders:
             if len(order_rows) == 0:

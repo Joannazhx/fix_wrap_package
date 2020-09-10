@@ -1,10 +1,16 @@
-import sys
-sys.path.append("..")
+# import sys, os
+# path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
+# print(path)
+# sys.path.append(path)
 from src.message import *
 import unittest
 
 class TestMessage(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        print("Message class test start :")
+    
     def setUp(self):
         self.h = Header("FIX.4.4", 61, '0', '2', "FIXSIM", "20180109-00:00:03.852")
         self.t = Trailer('055')
@@ -15,8 +21,9 @@ class TestMessage(unittest.TestCase):
                                         'F', 'QO37NA54U3C8NTYKHDT15N4_0', '25', 50, 50)
         self.log_on_msg = LogOnMessage(self.h, self.t ,'30')
 
-    def tearDown(self):
-        pass
+    @classmethod
+    def tearDownClass(cls):
+        print("Message class test finished\n")
 
     def test_header_gets(self):
         self.assertEqual("FIX.4.4", self.h.getBeginString())

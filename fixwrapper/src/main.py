@@ -8,11 +8,10 @@ def parse(options):
         sys.exit()
     out_dir = os.path.abspath(options.out_dir)
     if not os.path.isdir(out_dir):
-        os.makedir(out_dir)
+        os.mkdir(out_dir)
     
     w = Wrapper(file_path, out_dir)
     w.start()
-
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

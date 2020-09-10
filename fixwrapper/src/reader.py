@@ -1,4 +1,3 @@
-
 from message import *
 
 class Reader():
@@ -52,6 +51,10 @@ class Reader():
         for field in messages:
             (key, value) = field.split("=")
             dict_mess[key] = value
+        
         mess = self.createMessage(dict_mess)
+        # if type(mess).__name__ == 'TradeMessage':
+            # print(dict_mess)
+            # print(line)
         return mess
         
