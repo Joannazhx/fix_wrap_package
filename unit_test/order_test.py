@@ -4,6 +4,7 @@ from src.order import *
 import unittest
 
 class TestOrder(unittest.TestCase):
+    """test all functions in CLass Order"""
 
     @classmethod
     def setUpClass(cls):

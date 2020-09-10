@@ -2,6 +2,7 @@ from src.reader import *
 import unittest
 
 class TestReader(unittest.TestCase):
+    """test all functions in CLass Reader"""
 
     @classmethod
     def setUpClass(cls):

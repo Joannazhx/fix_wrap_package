@@ -3,6 +3,7 @@ from src.message import *
 import unittest
 
 class TestMessage(unittest.TestCase):
+    """test all functions in CLass Message"""
 
     @classmethod
     def setUpClass(cls):
