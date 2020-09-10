@@ -7,7 +7,7 @@ class TestOrder(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print("Reader class test start :")
+        print("Order class test start :")
 
     def setUp(self):
         self.order = Order('QO37NA54U3C8NTYKHDT15N4_0', '\t0700', 0, 'buy', 'TEST1234', 0, '0', 100, '0')

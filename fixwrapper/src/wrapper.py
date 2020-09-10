@@ -1,8 +1,11 @@
+import csv, os, sys
+import os, sys
+path = os.path.abspath(os.path.dirname(__file__))
+sys.path.append(path)
 from reader import *
 from order_pool import *
 from message import *
 from const import *
-import csv, os, sys
 
 
 class Wrapper():
@@ -27,7 +30,7 @@ class Wrapper():
             order = self.updateOrder()
             if not order is None:    
                 self.updateOrderPool(order)
-                # order.setPos()
+                order.setPos()
                 print((self.__order_pool.serachOrder(order.getOrderId())).printOrder())
         self.orderPoolOut()
             
@@ -63,6 +66,3 @@ class Wrapper():
         with open(filepath, writer) as csvfile: 
             writer = csv.writer(csvfile)
             writer.writerow(row)
-
-    def outDir(self):
-        print(sys.path[0])
