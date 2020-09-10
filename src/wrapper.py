@@ -7,11 +7,10 @@ import csv, os, sys
 class Wrapper():
 
     def __init__(self, file_path, out_dir):
-        self.__file = file_path #"/Users/joanna/Desktop/jobs/OnGoing/quantifeed/FIX.09-Jan-2018.log"
+        self.__file = file_path 
         self.__reader = Reader(self.__file)
         self.__mess = {}
         self.__order_pool = OrderPool()
-        # self.__out_dir = out_dir
         self.__out_execu = os.path.abspath(os.path.join(out_dir, EXECUFILE))
         self.__out_order = os.path.abspath(os.path.join(out_dir, ORDERFILE))
         self.__out_account = os.path.abspath(os.path.join(out_dir, ACCOUNTFILE))

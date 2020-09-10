@@ -1,0 +1,13 @@
+test_header_gets (message_test.TestMessage) ... ok
+test_header_sets (message_test.TestMessage) ... ok
+test_log_on_gets (message_test.TestMessage) ... ok
+test_log_on_sets (message_test.TestMessage) ... ok
+test_trade_message_gets (message_test.TestMessage) ... ok
+test_trade_message_sets (message_test.TestMessage) ... ok
+test_trailer_gets (message_test.TestMessage) ... ok
+test_trailer_sets (message_test.TestMessage) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.001s
+
+OK
