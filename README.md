@@ -1,4 +1,10 @@
-# FIX_wrapper
+# FIX log file constructor
+> Given the FIX log file extracted from integration testing, reconstruct the log file.
+
+This is an efficient python implementation of reconstructing a standard FIX (Financial Information Exchange) log data messages from the platform build for a brokerage client.
+<https://www.onixs.biz/fix-dictionary/4.4/index.html>
+For a short definition of trading and positions to understand the log data <https://www.quora.com/What-is-the-difference-between-Orders-Trades-and-Positions-in-Forex-trading#:~:text=A%20position%20is%20exposure%20to,now%20you%20sell%20to%20close.>
+ The program outputs 3 csv files containing the orders made by customer, executed trade transactions and the related account position of the relative orders.
 ```
 FIX_wrapper
 │
@@ -38,25 +44,25 @@ FIX_wrapper
 │   	 		  │
 │   	 		  └─── output_1 / output_2     (expected results)
 │   	 		  		  │
-│   	 		  		  └─── account_position.csv  (account position)
+│   	 		  		  └─── account_position.csv
 │   	 		  		  │
-│   	 		  		  └─── orders.csv		    (customer order)
+│   	 		  		  └─── orders.csv
 │   	 		  		  │
-│   	 		  		  └─── execu.csv			 (executed transactions)
+│   	 		  		  └─── execu.csv
 │
 └─── input
 │      │
-│      └─── FIX.09-Jan-2018.log          (input log file)
+│      └─── FIX.09-Jan-2018.log   (input log file)
 │
 └─── output   (output files)
 │   	│
-│   	└─── account_position.csv  (account position)
+│   	└─── account_position.csv  	(account position)
 │   	│
-│   	└─── orders.csv		    (customer order)
+│   	└─── orders.csv		    	(customer order)
 │   	│
-│       └─── execu.csv			 (executed transactions)
+│       └─── execu.csv			 	(executed transactions)
 │   	│
-│       └─── test_report.txt	   (unit test report)
+│       └─── test_report.txt	   	(unit test report)
 │
 └─── Design (UML design)
 ```
