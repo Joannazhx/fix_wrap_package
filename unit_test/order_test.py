@@ -5,11 +5,16 @@ import unittest
 
 class TestOrder(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        print("Reader class test start :")
+
     def setUp(self):
         self.order = Order('QO37NA54U3C8NTYKHDT15N4_0', '\t0700', 0, 'buy', 'TEST1234', 0, '0', 100, '0')
     
-    def tearDown(self):
-        pass
+    @classmethod
+    def tearDownClass(cls):
+        print("Order class test finished")
 
     def test_order_gets(self):
         self.assertEqual('QO37NA54U3C8NTYKHDT15N4_0', self.order.getOrderId())
