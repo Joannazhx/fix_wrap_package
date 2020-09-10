@@ -1,13 +1,29 @@
+test_log1 (logs_test.TestLogs) ... ok
+test_log2 (logs_test.TestLogs) ... ok
+test_exec_message_format (message_test.TestMessage) ... ok
 test_header_gets (message_test.TestMessage) ... ok
 test_header_sets (message_test.TestMessage) ... ok
 test_log_on_gets (message_test.TestMessage) ... ok
 test_log_on_sets (message_test.TestMessage) ... ok
+test_order_message_format (message_test.TestMessage) ... ok
 test_trade_message_gets (message_test.TestMessage) ... ok
 test_trade_message_sets (message_test.TestMessage) ... ok
 test_trailer_gets (message_test.TestMessage) ... ok
 test_trailer_sets (message_test.TestMessage) ... ok
+test_add_order_to_pool (order_pool_test.TestOrderPool) ... ok
+test_serach_order_pool (order_pool_test.TestOrderPool) ... ok
+test_update_order_to_pool (order_pool_test.TestOrderPool) ... ok
+test_order_gets (order_test.TestOrder) ... ok
+test_order_headers (order_test.TestOrder) ... ok
+test_order_print_order (order_test.TestOrder) ... ok
+test_order_set_position (order_test.TestOrder) ... ok
+test_order_value (order_test.TestOrder) ... ok
+test_reader_create_mess_heart (reader_test.TestReader) ... ok
+test_reader_create_mess_logon (reader_test.TestReader) ... ok
+test_reader_create_mess_trade (reader_test.TestReader) ... ok
+test_reader_read_line (reader_test.TestReader) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 0.001s
+Ran 24 tests in 0.074s
 
 OK
