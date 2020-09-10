@@ -32,6 +32,9 @@ class Order():
     def getAccountNum(self):
         return self.__account_num
 
+    def setAccountNum(self, account_num):
+        self.__account_num = account_num
+
     def setAverPrice(self, aver_price):
         self.__aver_price = aver_price
 
@@ -52,12 +55,26 @@ class Order():
 
     def getCode(self):
         return str(self.__code)
+
+    def setCode(self, code):
+        self.__code = code
     
     def getSide(self):
         return self.__side
 
+    def setSide(self, side):
+        if side == '1':
+            self.__side = "buy"
+        elif side == '2':
+            self.__side = "sell"
+        else:
+            self.__side = side
+
     def getOrderId(self):
         return self.__order_id
+    
+    def setOrderId(self, order_id):
+        self.__order_id = order_id
 
     def getLeftQty(self):
         return self.__left_qty
@@ -83,4 +100,5 @@ class Order():
         out_str = ""
         for i in range(len(headers)):
             out_str += ( headers[i] + " : " + str(out_values[i]) + " | ")
-        print(out_str)
+        # print(out_str)
+        return out_str

@@ -28,7 +28,7 @@ class Wrapper():
             if not order is None:    
                 self.updateOrderPool(order)
                 # order.setPos()
-                (self.__order_pool.serachOrder(order.getOrderId())).printOrder()
+                print((self.__order_pool.serachOrder(order.getOrderId())).printOrder())
         self.orderPoolOut()
             
     def updateOrder(self):
@@ -56,6 +56,7 @@ class Wrapper():
         self.csv_write(self.__out_account, [], "w")
         for row in rows:
             self.csv_write(self.__out_account, row, "a+")
+            # print(row)
                 
 
     def csv_write(self, filepath, row, writer):
