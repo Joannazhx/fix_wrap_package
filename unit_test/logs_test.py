@@ -8,6 +8,7 @@ from src.wrapper import *
 import unittest
 
 class TestLogs(unittest.TestCase):
+    """test test1.txt test2.txt compare results"""
 
     @classmethod
     def setUpClass(cls):
