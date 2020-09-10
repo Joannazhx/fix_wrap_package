@@ -66,11 +66,11 @@ FIX_wrapper
 │
 └─── Design (UML design)
 ```
-#Description
+##Description
 This program aims to analysis log file from integration testing, the test platform using standard FIX (Financial Information Exchange) protocol to instruct the client’s system to send orders and return the execution results. This platform receives orders from customer and make transcations.This program is able to reconstruct the log file and analysis orders and trade.
-##The input data format
+###The input data format
 Every type include header and trailer
-###Header
+####Header
 ```
 		+   -HEADER
     	|   8 @begin_string      = FIX.4.4
@@ -84,12 +84,12 @@ Every type include header and trailer
     	|   52 @sending_time     = 20101124-20:27:25.000
     	|   56 @target_comp_id   = WIKIPEDIA
 ```
-###Trailer
+####Trailer
 ```
     	|   10  @check_sum         = 133
 ```
 
-### 1. Heart Beat / Log Out
+#### 1. Heart Beat / Log Out
 ```
         @header
         @trailer
@@ -100,7 +100,7 @@ Heart beat
 LogOut
 8=FIX.4.4	|	9=55	|	35=5	|	34=1	|	49=FIXSIM	|	52=20180109-04:56:33.624	|	56=QFSAMPLE	|	10=073	|
 
-### 2. Log On
+#### 2. Log On
 ```
 		@header
         +   BODY
@@ -111,7 +111,7 @@ LogOut
 LogOn
 8=FIX.4.4	|	9=73	|	35=A	|	34=1	|	49=FIXSIM	|	52=20180109-00:00:03.618	|	56=QFSAMPLE	|	98=0	|	108=30	|	141=Y	|	10=140	|
 
-###3. Trade / New Order
+####3. Trade / New Order
 ```
 		@header
         +   BODY
