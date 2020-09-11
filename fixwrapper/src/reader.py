@@ -60,6 +60,5 @@ class Reader():
         for field in messages:
             (key, value) = field.split("=")
             dict_mess[key] = value
-
         mess = self.create_message(dict_mess)
         return mess
