@@ -5,6 +5,8 @@ This is an efficient python implementation of reconstructing a standard FIX (Fin
 <https://www.onixs.biz/fix-dictionary/4.4/index.html>
 For a short definition of trading and positions to understand the log data <https://www.quora.com/What-is-the-difference-between-Orders-Trades-and-Positions-in-Forex-trading#:~:text=A%20position%20is%20exposure%20to,now%20you%20sell%20to%20close.>
  The program outputs 3 csv files containing the orders made by customer, executed trade transactions and the related account position of the relative orders.
+#github link
+<https://github.com/Joannazhx/FIX_wrapper/>
 # Folder Structure
 ```
 FIX_wrapper
