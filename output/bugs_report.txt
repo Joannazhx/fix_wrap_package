@@ -1,36 +1,36 @@
-test_check_sum (bugs_test.TestBugs) ... FAIL
-test_fix_format (bugs_test.TestBugs) ... FAIL
-test_length (bugs_test.TestBugs) ... FAIL
-test_trade_price (bugs_test.TestBugs) ... ok
-test_trade_qtys (bugs_test.TestBugs) ... ok
+test_check_sum (bugs_tests.TestBugs) ... FAIL
+test_fix_format (bugs_tests.TestBugs) ... FAIL
+test_length (bugs_tests.TestBugs) ... FAIL
+test_trade_price (bugs_tests.TestBugs) ... ok
+test_trade_qtys (bugs_tests.TestBugs) ... ok
 
 ======================================================================
-FAIL: test_check_sum (bugs_test.TestBugs)
+FAIL: test_check_sum (bugs_tests.TestBugs)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_test.py", line 47, in test_check_sum
+  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_tests.py", line 47, in test_check_sum
     self.assertEqual(int(mess.get_trailer().get_check_sum()), sys.getsizeof(line) % 256)
 AssertionError: 55 != 128
 
 ======================================================================
-FAIL: test_fix_format (bugs_test.TestBugs)
+FAIL: test_fix_format (bugs_tests.TestBugs)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_test.py", line 31, in test_fix_format
+  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_tests.py", line 31, in test_fix_format
     self.assertEqual(messages[0], '8=FIX.4.4')
 AssertionError: "# Opened at '1/9/2018 6:19:53 PM' (current recvSeqno=1643, sendSeqno=1600)\n" != '8=FIX.4.4'
 - # Opened at '1/9/2018 6:19:53 PM' (current recvSeqno=1643, sendSeqno=1600)
 + 8=FIX.4.4
 
 ======================================================================
-FAIL: test_length (bugs_test.TestBugs)
+FAIL: test_length (bugs_tests.TestBugs)
 ----------------------------------------------------------------------
 Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_test.py", line 39, in test_length
+  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_tests.py", line 39, in test_length
     self.assertEqual(mess.get_header().get_body_length(), len(line))
 AssertionError: 73 != 76
 
 ----------------------------------------------------------------------
-Ran 5 tests in 0.074s
+Ran 5 tests in 0.075s
 
 FAILED (failures=3)

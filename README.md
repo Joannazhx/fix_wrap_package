@@ -1,4 +1,43 @@
-# FIX log file constructor
+- [ Answers](#head26)
+	- [ Q1](#head27)
+	- [ Q2](#head28)
+		- [1.The orders that the account sent](#head29)
+		- [2.The account’s positions now](#head30)
+	- [ Q3](#head31)
+		- [Proceed the investigation](#head32)
+		- [Bugs find in log files](#head33)
+			- [1.log content format](#head34)
+			- [2.FIX body length not correct](#head35)
+			- [3.check sum not correct](#head36)
+			- [4.Precision of trascation time](#head37)
+- [FIX log file constructor](#head1)
+- [Folder Structure](#head2)
+- [Design UML](#head3)
+- [ Description](#head4)
+	- [Input Data Foprmat](#head5)
+		- [ Header](#head6)
+		- [ Trailer](#head7)
+		- [1. Heart Beat / Log Out](#head8)
+		- [2. Log On](#head9)
+		- [3. Trade / New Order](#head10)
+	- [Enviroment Set Up](#head11)
+		- [ requirement](#head12)
+			- [1.python 3.7.1](#head13)
+			- [2. pip](#head14)
+			- [3. requirement.txt](#head15)
+		- [OS X & Linux install](#head16)
+	- [Run Program](#head17)
+		- [1. Reconstruct log file](#head18)
+		- [2. Run unit tests](#head19)
+		- [3. Run bug investagetion](#head20)
+	- [Output Description](#head21)
+		- [1. execu.csv -- the executed transactions](#head211)
+		- [2. order.csv -- the orders that the account sent](#head22)
+		- [3.account_position.csv -- The account’s positions now](#head23)
+		- [4.test_report.txt -- unit tests report](#head24)
+		- [5.bugs_report.txt -- bugs located for customers](#head25)
+
+# <span id="head1">FIX log file constructor</span>
 > Given the FIX log file extracted from integration testing, reconstruct the log file.
 
 This is an efficient python implementation of reconstructing a standard FIX (Financial Information Exchange) log data messages from the platform build for a brokerage client.
@@ -7,7 +46,7 @@ For a short definition of trading and positions to understand the log data <http
  The program outputs 3 csv files containing the orders made by customer, executed trade transactions and the related account position of the relative orders.
 #github link
 <https://github.com/Joannazhx/FIX_wrapper/>
-# Folder Structure
+# <span id="head2">Folder Structure</span>
 ```
 FIX_wrapper
 │
@@ -76,13 +115,13 @@ FIX_wrapper
 └─── requirement.txt  (python package versions)
 
 ```
-# Design UML
+# <span id="head3">Design UML</span>
 ![avatar](UML.png)
-# Description
+# <span id="head4"> Description</span>
 This program aims to analysis log file from integration testing, the test platform using standard FIX (Financial Information Exchange) protocol to instruct the client’s system to send orders and return the execution results. This platform receives orders from customer and make transcations.This program is able to reconstruct the log file and analysis orders and trade.
-## Input Data Foprmat
+## <span id="head5">Input Data Foprmat</span>
 Every type include header and trailer
-### Header
+### <span id="head6"> Header</span>
 ```
 	    +   -HEADER
     	|   8 @begin_string      = FIX.4.4
@@ -96,12 +135,12 @@ Every type include header and trailer
     	|   52 @sending_time     = 20101124-20:27:25.000
     	|   56 @target_comp_id   = WIKIPEDIA
 ```
-### Trailer
+### <span id="head7"> Trailer</span>
 ```
     	|   10  @check_sum         = 133
 ```
 
-### 1. Heart Beat / Log Out
+### <span id="head8">1. Heart Beat / Log Out</span>
 ```
         @header
         @trailer
@@ -112,7 +151,7 @@ Heart beat\
 LogOut\
 8=FIX.4.4	|	9=55	|	35=5	|	34=1	|	49=FIXSIM	|	52=20180109-04:56:33.624	|	56=QFSAMPLE	|	10=073	| \
 
-### 2. Log On
+### <span id="head9">2. Log On</span>
 ```
 	@header
         +   BODY
@@ -123,7 +162,7 @@ LogOut\
 LogOn \
 8=FIX.4.4	|	9=73	|	35=A	|	34=1	|	49=FIXSIM	|	52=20180109-00:00:03.618	|	56=QFSAMPLE	|	98=0	|	108=30	|	141=Y	|	10=140	| \
 
-### 3. Trade / New Order
+### <span id="head10">3. Trade / New Order</span>
 ```
 	@header
         +   BODY
@@ -146,15 +185,15 @@ New Order\
 8=FIX.4.4	|	9=232	|	35=8	|	34=242	|	49=FIXSIM|52=20180109-07:01:01.905	|	56=QFSAMPLE	|	1=TEST1234	|	6=0	|	11=QO37NA54U3C8NTYKHDT15N4_0	|	14=0	|	17=2636510780617342000	|	31=0	|	32=0	|	37=2636510780617342000	|	38=100	|	39=0	|	54=1	|	55=0700	|	60=20180109-07:01:01	|	150=0	|	151=100	|	207=HKE	|	10=226	| \
 Trade\
 8=FIX.4.4	|	9=235	|	35=8	|	34=249	|	49=FIXSIM|52=20180109-07:01:04.214	|	56=QFSAMPLE	|	1=TEST1234	|	6=25	|	11=QO37NA54U3C8NTYKHDT15N4_0	|	14=50	|	17=9636510780641834000	|	31=25	|	32=50	|	37=9636510780641834000	|	38=100	|	39=1	|	54=1	|	55=0700	|	60=20180109-07:01:04	|	150=F	|	151=50	|	207=HKE	|	10=194	| \
-## Enviroment Set Up
-### requirement
-#### 1.python 3.7.1
+## <span id="head11">Enviroment Set Up</span>
+### <span id="head12"> requirement</span>
+#### <span id="head13">1.python 3.7.1</span>
 <https://www.python.org/downloads/release/python-371/>
 Recommand to use virtual enviroment, for more information in how to use virtualenwrapper to create a python virtual enviroment
 <https://virtualenvwrapper.readthedocs.io/en/latest/index.html>
-#### 2. pip
+#### <span id="head14">2. pip</span>
 <https://www.liquidweb.com/kb/install-pip-windows/>
-#### 3. requirement.txt
+#### <span id="head15">3. requirement.txt</span>
 ```
 numpy==1.19.0
 pandas==1.1.1
@@ -162,14 +201,14 @@ pep8==1.7.1
 pylint==2.6.0
 ```
 
-### OS X & Linux install
+### <span id="head16">OS X & Linux install</span>
 ```
 workon <python3_virtual_env_name>
 pip install -r requirement.txt
 ```
 
-## Run Program
-### 1.Reconstruct log file
+## <span id="head17">Run Program</span>
+### <span id="head18">1. Reconstruct log file</span>
 To reconstruct the log we can run src/main.py which has the following usage:
 
 ```
@@ -181,18 +220,18 @@ usage:    python src/main.py -f log_file [-o] output dir
  -o, --out_dir  Output files dir , default=output/
 ```
 
-### 2. Run unit tests
+### <span id="head19">2. Run unit tests</span>
 To run all unit tests
 ```
 usage:    python unit_test/test_wrap.py
 ```
-### 3. Run bug investagetion
+### <span id="head20">3. Run bug investagetion</span>
 To find what's might be wrong
 ```
 usage:    python unit_test/bugs_tests.py
 ```
-## Output Description
-### 1. execu.csv -- the executed transactions
+## <span id="head21">Output Description</span>
+### <span id="head211">1. execu.csv -- the executed transactions</span>
 
 | OutputStock Code | Transaction Quantity |	Transaction Price |	Transaction Side |	Account | Transaction Reference ID | Transaction Time |
 |------------------|----------------------|-------------------|------------------|----------|----------------------------|------------------|
@@ -206,21 +245,21 @@ usage:    python unit_test/bugs_tests.py
 |	1357 |	125	 |  25	|  buy	| TEST1234	| QO37NA54U3C8NU0LOVQ15N7_0	| 20180109-07:01:04 |
 |	1357 |	62	 |  25	|  buy	| TEST1234	| QO37NA54U3C8NU0LOVQ15N7_0	| 20180109-07:01:04 |
 |	...  |	...	 |  ... |  ...	|    ... 	| 			...				| 		...			|
-### 2. order.csv -- the orders that the account sent
+### <span id="head22">2. order.csv -- the orders that the account sent</span>
 | Stock Code |	Account |Total Quantity|Transaction Side| Transaction Reference ID  | Transaction Time  |
 |------------|----------|--------------|----------------|---------------------------|-------------------|
 |	0700	 | TEST1234 |	   100	   |       buy	    | QO37NA54U3C8NTYKHDT15N4_0 | 20180109-07:01:01 |
 |	0992     | TEST1234	|     2000	   |       buy		| QO37NA54U3C8NTZ70I315N5_0	| 20180109-07:01:02 |
 |	981      | TEST1234	|     1000	   |	   buy		| QO37NA54U3C8NTZWKRD15N6_0	| 20180109-07:01:02 |
 |	1357     | TEST1234	|     1000	   |       buy	    | QO37NA54U3C8NU0LOVQ15N7_0	| 20180109-07:01:02 |
-### 3.account_position.csv -- The account’s positions now
+### <span id="head23">3.account_position.csv -- The account’s positions now</span>
 | order_id	 | account_num	| code	| last_qty	| left_qty | cum_qty | aver_price | last_price | side |	position |
 |------------|--------------|-------|-----------|----------|---------|------------|------------|-------|-------------|
 | QO37NA54U3C8NTYKHDT15N4_0 | TEST1234 | 0700 | 1 |	0 |	100  | 25 | 25 | buy | closed |
 | QO37NA54U3C8NTZ70I315N5_0	| TEST1234 | 0992 |	1 |	0 |	2000 | 25 |	25 | buy | closed |
 | QO37NA54U3C8NTZWKRD15N6_0	| TEST1234 | 981  |	1 |	0 |	1000 | 25 |	25 | buy | closed |
 | QO37NA54U3C8NU0LOVQ15N7_0	| TEST1234 | 1357 |	1 |	0 |	1000 | 25 |	25 | buy | closed |
-### 4.test_report.txt -- unit tests report
+### <span id="head24">4.test_report.txt -- unit tests report</span>
 ```
 testtest_log1 (logs_test.TestLogs) ... ok
 test_log2 (logs_test.TestLogs) ... ok
@@ -253,7 +292,7 @@ Ran 24 tests in 0.311s
 OK
 
 ```
-### 5.bugs_report.txt -- bugs located for customers
+### <span id="head25">5.bugs_report.txt -- bugs located for customers</span>
 ```
 test_check_sum (bugs_test.TestBugs) ... FAIL
 test_fix_format (bugs_test.TestBugs) ... FAIL
@@ -291,44 +330,52 @@ AssertionError: 73 != 76
 Ran 5 tests in 0.074s
 FAILED (failures=3)
 ```
-# Answers
-## Q1
-From the file, please extract the executed transactions and output a CSV file \
-output/execu.csv [output description](### 1. execu.csv -- the executed transactions)
-## Q2
+# <span id="head26"> Answers</span>
+## <span id="head27"> Q1</span>
+From the file, please extract the executed transactions and output a CSV file
+output/execu.csv
+[execu.csv description](#head211)
+
+## <span id="head28"> Q2</span>
 The program keeps track of orders' after every trade. When an order is created by the customer, it will be added to the order pool. When a trade is exacuated, it will update the corresponding order in order pool(based on unique order id). If the orders' left quantity equal to 0, that means the order is fully traded and the position of the order is closed.
-### 1.The orders that the account sent
-output/orders.csv [output description](### 2. order.csv -- the orders that the account sent)
-### 2.The account’s positions now
-output/account_position [output description](### 3.account_position.csv -- The account’s positions now)
-## Q3
-### Proceed the investigation
+
+### <span id="head29">1.The orders that the account sent</span>
+output/orders.csv
+[orders.csv description](#head22)
+
+### <span id="head30">2.The account’s positions now</span>
+ output/account_position.csv
+[account_position.csv description](#head23)
+
+## <span id="head31"> Q3</span>
+### <span id="head32">Proceed the investigation</span>
 First, I will look at the release report of the platform version customer uses and run the test cases again. To see are there any known bugs that may affect these problems.
 Secondly, I will look at the mnost recent log files to see is there any instict bugs. Later, I will build new test cases based on the log files and run it to repeat customer's ueser actions.After I locate the potential(unknown) bugs, I will communicate to developers' team to discuss about the solutions that might work.
 Then, I will reach to the customer to find out what's the wrong she experienced and give her a brief solution we could offer.Later, I will write a report to explain the situation and discuss it with developers' team to carry out and give customer an update.
-### Bugs find in log files
+### <span id="head33">Bugs find in log files</span>
 unit_test/bugs_test.py desined test cases for locate bugs
-#### 1.log content format
+[bugs_report.txt description](#head25)
+#### <span id="head34">1.log content format</span>
 One line in log file not in FIX standard format
 ```
 	# Opened at '1/9/2018 6:19:53 PM' (current recvSeqno=1643, sendSeqno=1600)
 	+ 8=FIX.4.4
 ```
-#### 2.FIX body length not correct
+#### <span id="head35">2.FIX body length not correct</span>
 FIX feild <9> not equal to body length
 ```
 	35=A|34=1|49=FIXSIM|52=20180109-00:00:03.618|56=QFSAMPLE|98=0|108=30|141=Y|
     self.assertEqual(mess.get_header().get_body_length(), len(line))
 	AssertionError: 73 != 76
 ```
-#### 3.check sum not correct
+#### <span id="head36">3.check sum not correct</span>
 FIX feild <10> not correct
 ```
 	8=FIX.4.4|9=61|35=0|34=2|49=FIXSIM|52=20180109-00:00:03.852|56=QFSAMPLE|112=2|
     self.assertEqual(int(mess.get_trailer().get_check_sum()), sys.getsizeof(line) % 256)
 	AssertionError: 55 != 128
 ```
-#### 4.Precision of trascation time
+#### <span id="head37">4.Precision of trascation time</span>
 the precision of trascatio time better to be same as sending time to increase accuracy
 
 ```

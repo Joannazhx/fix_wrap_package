@@ -17,53 +17,13 @@ test_order_gets (order_test.TestOrder) ... ok
 test_order_headers (order_test.TestOrder) ... ok
 test_order_print_order (order_test.TestOrder) ... ok
 test_order_set_position (order_test.TestOrder) ... ok
-test_order_value (order_test.TestOrder) ... ERROR
-test_reader_create_mess_heart (reader_test.TestReader) ... ERROR
-test_reader_create_mess_logon (reader_test.TestReader) ... ERROR
-test_reader_create_mess_trade (reader_test.TestReader) ... ERROR
-test_reader_read_line (reader_test.TestReader) ... ERROR
-
-======================================================================
-ERROR: test_order_value (order_test.TestOrder)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/order_test.py", line 60, in test_order_value
-    self.order.order_aalue())
-AttributeError: 'Order' object has no attribute 'order_aalue'
-
-======================================================================
-ERROR: test_reader_create_mess_heart (reader_test.TestReader)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/reader_test.py", line 24, in test_reader_create_mess_heart
-    self.assertEqual(58, mes.get_header().getBodyLength())
-AttributeError: 'Header' object has no attribute 'getBodyLength'
-
-======================================================================
-ERROR: test_reader_create_mess_logon (reader_test.TestReader)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/reader_test.py", line 33, in test_reader_create_mess_logon
-    mes = self.reader.createMessage(mes_log_on)
-AttributeError: 'Reader' object has no attribute 'createMessage'
-
-======================================================================
-ERROR: test_reader_create_mess_trade (reader_test.TestReader)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/reader_test.py", line 42, in test_reader_create_mess_trade
-    mes = self.reader.createMessage(mes_trade)
-AttributeError: 'Reader' object has no attribute 'createMessage'
-
-======================================================================
-ERROR: test_reader_read_line (reader_test.TestReader)
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/reader_test.py", line 75, in test_reader_read_line
-    self.assertEqual('F', mes.getExecType())
-AttributeError: 'TradeMessage' object has no attribute 'getExecType'
+test_order_value (order_test.TestOrder) ... ok
+test_reader_create_mess_heart (reader_test.TestReader) ... ok
+test_reader_create_mess_logon (reader_test.TestReader) ... ok
+test_reader_create_mess_trade (reader_test.TestReader) ... ok
+test_reader_read_line (reader_test.TestReader) ... ok
 
 ----------------------------------------------------------------------
-Ran 24 tests in 0.076s
+Ran 24 tests in 0.181s
 
-FAILED (errors=5)
+OK
