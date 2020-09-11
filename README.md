@@ -72,7 +72,10 @@ FIX_wrapper
 └─── Design (UML design)
 │
 └─── requirement.txt  (python package versions)
+
 ```
+# Design UML
+![avatar](UML.png)
 # Description
 This program aims to analysis log file from integration testing, the test platform using standard FIX (Financial Information Exchange) protocol to instruct the client’s system to send orders and return the execution results. This platform receives orders from customer and make transcations.This program is able to reconstruct the log file and analysis orders and trade.
 ## Input Data Foprmat
