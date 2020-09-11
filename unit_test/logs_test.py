@@ -23,8 +23,8 @@ class TestLogs(unittest.TestCase):
         sys.path.append(path)
         prc = subprocess.Popen("python src/main.py  -f unit_test/test_logs/test1.txt -o unit_test/test_logs/output1", shell=True)
         prc.wait()
-        path1 = "unit_test/test_logs/output_1"
-        path2 = "unit_test/test_logs/output1"
+        path1 = os.path.abspath(os.path.join(path, "unit_test/test_logs/output_1"))
+        path2 = os.path.abspath(os.path.join(path, "unit_test/test_logs/output1"))
         results = self.csvs_compare(path1, path2)
         for re in results:
             self.assertEqual(True, re) 
@@ -37,8 +37,8 @@ class TestLogs(unittest.TestCase):
             os.mkdir("unit_test/test_logs/output2")
         prc = subprocess.Popen("python src/main.py  -f unit_test/test_logs/test2.txt -o unit_test/test_logs/output2", shell=True)
         prc.wait()
-        path1 = "unit_test/test_logs/output_2"
-        path2 = "unit_test/test_logs/output2"
+        path1 = os.path.abspath(os.path.join(path, "unit_test/test_logs/output_2"))
+        path2 = os.path.abspath(os.path.join(path, "unit_test/test_logs/output2"))
         results = self.csvs_compare(path1, path2)
         for re in results:
             self.assertEqual(True, re)
