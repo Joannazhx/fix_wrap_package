@@ -37,13 +37,15 @@ FIX_wrapper
 │   	 │
 │   	 └─── test_wrap.py            (unit test execution-automatic loading)
 │   	 │
+│   	 └─── bugs_tests.py            (investage bugs)
+│   	 │
 │   	 └─── logs_test.py            (log files unit test cases)
 │   	 │
 │   	 └─── test_logs
 │   	 		  │
 │   	 		  └─── test1.txt / test2.txt   (input log files for test)
 │   	 		  │
-│   	 		  └─── output_1 / output_2     (expected results)
+│   	 		  └─── output_1 / output_2     (test cases expected results)
 │   	 		  		  │
 │   	 		  		  └─── account_position.csv
 │   	 		  		  │
@@ -64,6 +66,8 @@ FIX_wrapper
 │       └─── execu.csv			    (executed transactions)
 │   	│
 │       └─── test_report.txt	   	(unit test report)
+│   	│
+│       └─── bugs_report.txt	   	(bugs test report)
 │
 └─── Design (UML design)
 │
@@ -177,8 +181,13 @@ To run all unit tests
 ```
 usage:    python unit_test/test_wrap.py
 ```
+### 3. Run bug investagetion
+To find what's might be wrong
+```
+usage:    python unit_test/bugs_test.py
+```
 ## Output Description
-### 1. execu.csv -- the executed transactions (Q1)
+### 1. execu.csv -- the executed transactions
 
 | OutputStock Code | Transaction Quantity |	Transaction Price |	Transaction Side |	Account | Transaction Reference ID | Transaction Time |
 |------------------|----------------------|-------------------|------------------|----------|----------------------------|------------------|
@@ -192,14 +201,14 @@ usage:    python unit_test/test_wrap.py
 |	1357 |	125	 |  25	|  buy	| TEST1234	| QO37NA54U3C8NU0LOVQ15N7_0	| 20180109-07:01:04 |
 |	1357 |	62	 |  25	|  buy	| TEST1234	| QO37NA54U3C8NU0LOVQ15N7_0	| 20180109-07:01:04 |
 |	...  |	...	 |  ... |  ...	|    ... 	| 			...				| 		...			|
-### 2. order.csv -- the orders that the account sent(Q2(1))
+### 2. order.csv -- the orders that the account sent
 | Stock Code |	Account |Total Quantity|Transaction Side| Transaction Reference ID  | Transaction Time  |
 |------------|----------|--------------|----------------|---------------------------|-------------------|
 |	0700	 | TEST1234 |	   100	   |       buy	    | QO37NA54U3C8NTYKHDT15N4_0 | 20180109-07:01:01 |
 |	0992     | TEST1234	|     2000	   |       buy		| QO37NA54U3C8NTZ70I315N5_0	| 20180109-07:01:02 |
 |	981      | TEST1234	|     1000	   |	   buy		| QO37NA54U3C8NTZWKRD15N6_0	| 20180109-07:01:02 |
 |	1357     | TEST1234	|     1000	   |       buy	    | QO37NA54U3C8NU0LOVQ15N7_0	| 20180109-07:01:02 |
-### 3.account_position.csv -- The account’s positions now(Q2(2))
+### 3.account_position.csv -- The account’s positions now
 | order_id	 | account_num	| code	| last_qty	| left_qty | cum_qty | aver_price | last_price | side |	position |
 |------------|--------------|-------|-----------|----------|---------|------------|------------|-------|-------------|
 | QO37NA54U3C8NTYKHDT15N4_0 | TEST1234 | 0700 | 1 |	0 |	100  | 25 | 25 | buy | closed |
@@ -239,13 +248,86 @@ Ran 24 tests in 0.311s
 OK
 
 ```
-#Answers
+### 5.bugs_report.txt -- bugs located for customers
+```
+test_check_sum (bugs_test.TestBugs) ... FAIL
+test_fix_format (bugs_test.TestBugs) ... FAIL
+test_length (bugs_test.TestBugs) ... FAIL
+test_trade_price (bugs_test.TestBugs) ... ok
+test_trade_qtys (bugs_test.TestBugs) ... ok
+
+======================================================================
+FAIL: test_check_sum (bugs_test.TestBugs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_test.py", line 47, in test_check_sum
+    self.assertEqual(int(mess.get_trailer().get_check_sum()), sys.getsizeof(line) % 256)
+AssertionError: 55 != 128
+
+======================================================================
+FAIL: test_fix_format (bugs_test.TestBugs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_test.py", line 31, in test_fix_format
+    self.assertEqual(messages[0], '8=FIX.4.4')
+AssertionError: "# Opened at '1/9/2018 6:19:53 PM' (current recvSeqno=1643, sendSeqno=1600)\n" != '8=FIX.4.4'
+- # Opened at '1/9/2018 6:19:53 PM' (current recvSeqno=1643, sendSeqno=1600)
++ 8=FIX.4.4
+
+======================================================================
+FAIL: test_length (bugs_test.TestBugs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/joanna/Desktop/jobs/OnGoing/quantifeed/unit_test/bugs_test.py", line 39, in test_length
+    self.assertEqual(mess.get_header().get_body_length(), len(line))
+AssertionError: 73 != 76
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.074s
+FAILED (failures=3)
+```
+# Answers
 ## Q1
 From the file, please extract the executed transactions and output a CSV file \
-output/execu.csv [output description](### 1. execu.csv -- the executed transactions (Q1)
+output/execu.csv [output description](### 1. execu.csv -- the executed transactions)
 ## Q2
+The program keeps track of orders' after every trade. When an order is created by the customer, it will be added to the order pool. When a trade is exacuated, it will update the corresponding order in order pool(based on unique order id). If the orders' left quantity equal to 0, that means the order is fully traded and the position of the order is closed.
 ### 1.The orders that the account sent
+output/orders.csv [output description](### 2. order.csv -- the orders that the account sent)
 ### 2.The account’s positions now
+output/account_position [output description](### 3.account_position.csv -- The account’s positions now)
 ## Q3
+### Proceed the investigation
+First, I will look at the release report of the platform version customer uses and run the test cases again. To see are there any known bugs that may affect these problems.
+Secondly, I will look at the mnost recent log files to see is there any instict bugs. Later, I will build new test cases based on the log files and run it to repeat customer's ueser actions.After I locate the potential(unknown) bugs, I will communicate to developers' team to discuss about the solutions that might work.
+Then, I will reach to the customer to find out what's the wrong she experienced and give her a brief solution we could offer.Later, I will write a report to explain the situation and discuss it with developers' team to carry out and give customer an update.
+### Bugs find in log files
+unit_test/bugs_test.py desined test cases for locate bugs
+#### 1.log content format
+One line in log file not in FIX standard format
+```
+	# Opened at '1/9/2018 6:19:53 PM' (current recvSeqno=1643, sendSeqno=1600)
+	+ 8=FIX.4.4
+```
+#### 2.FIX body length not correct
+FIX feild <9> not equal to body length
+```
+	35=A|34=1|49=FIXSIM|52=20180109-00:00:03.618|56=QFSAMPLE|98=0|108=30|141=Y|
+    self.assertEqual(mess.get_header().get_body_length(), len(line))
+	AssertionError: 73 != 76
+```
+#### 3.check sum not correct
+FIX feild <10> not correct
+```
+	8=FIX.4.4|9=61|35=0|34=2|49=FIXSIM|52=20180109-00:00:03.852|56=QFSAMPLE|112=2|
+    self.assertEqual(int(mess.get_trailer().get_check_sum()), sys.getsizeof(line) % 256)
+	AssertionError: 55 != 128
+```
+#### 4.Precision of trascation time
+the precision of trascatio time better to be same as sending time to increase accuracy
 
+```
+	52=20180109-07:01:09.565 -- sending time
+    60=20180109-07:01:09     -- transaction time 
+```
 
