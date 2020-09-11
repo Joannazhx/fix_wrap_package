@@ -33,6 +33,9 @@ class Wrapper():
         self.__out_account = os.path.abspath(os.path.join(
             out_dir, ACCOUNTFILE))
 
+    def get_order_pool(self):
+        return self.__order_pool
+
     def start(self):
         """continuing read and process message,
             update orders till end of log,
