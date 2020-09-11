@@ -80,7 +80,7 @@ class TestBugs(unittest.TestCase):
 if __name__ == "__main__":
     path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
     test_dir = os.path.abspath(os.path.join(path, 'unit_test'))
-    discover = unittest.defaultTestLoader.discover(test_dir, pattern='bugs_test.py')
+    discover = unittest.defaultTestLoader.discover(test_dir, pattern='bugs_tests.py')
 
     report_file = os.path.abspath(os.path.join(path, 'output/bugs_report.txt'))
     with open(report_file, "w") as report_file:
