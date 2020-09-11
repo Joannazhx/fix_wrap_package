@@ -1,3 +1,15 @@
+- [ Answers](#head26)
+	- [ Q1](#head27)
+	- [ Q2](#head28)
+		- [1.The orders that the account sent](#head29)
+		- [2.The account’s positions now](#head30)
+	- [ Q3](#head31)
+		- [Proceed the investigation](#head32)
+		- [Bugs find in log files](#head33)
+			- [1.log content format](#head34)
+			- [2.FIX body length not correct](#head35)
+			- [3.check sum not correct](#head36)
+			- [4.Precision of trascation time](#head37)
 - [FIX log file constructor](#head1)
 - [Folder Structure](#head2)
 - [Design UML](#head3)
@@ -24,18 +36,7 @@
 		- [3.account_position.csv -- The account’s positions now](#head23)
 		- [4.test_report.txt -- unit tests report](#head24)
 		- [5.bugs_report.txt -- bugs located for customers](#head25)
-- [ Answers](#head26)
-	- [ Q1](#head27)
-	- [ Q2](#head28)
-		- [1.The orders that the account sent](#head29)
-		- [2.The account’s positions now](#head30)
-	- [ Q3](#head31)
-		- [Proceed the investigation](#head32)
-		- [Bugs find in log files](#head33)
-			- [1.log content format](#head34)
-			- [2.FIX body length not correct](#head35)
-			- [3.check sum not correct](#head36)
-			- [4.Precision of trascation time](#head37)
+
 # <span id="head1">FIX log file constructor</span>
 > Given the FIX log file extracted from integration testing, reconstruct the log file.
 
@@ -353,6 +354,7 @@ Secondly, I will look at the mnost recent log files to see is there any instict 
 Then, I will reach to the customer to find out what's the wrong she experienced and give her a brief solution we could offer.Later, I will write a report to explain the situation and discuss it with developers' team to carry out and give customer an update.
 ### <span id="head33">Bugs find in log files</span>
 unit_test/bugs_test.py desined test cases for locate bugs
+[bugs_report.txt description](#head25)
 #### <span id="head34">1.log content format</span>
 One line in log file not in FIX standard format
 ```
