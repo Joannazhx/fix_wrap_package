@@ -79,7 +79,7 @@ This program aims to analysis log file from integration testing, the test platfo
 Every type include header and trailer
 ### Header
 ```
-		+   -HEADER
+	    +   -HEADER
     	|   8 @begin_string      = FIX.4.4
     	|   9 @body_length       = 178
     	|   35 @msg_type         = Logon (A)
@@ -184,7 +184,7 @@ usage:    python unit_test/test_wrap.py
 ### 3. Run bug investagetion
 To find what's might be wrong
 ```
-usage:    python unit_test/bugs_test.py
+usage:    python unit_test/bugs_tests.py
 ```
 ## Output Description
 ### 1. execu.csv -- the executed transactions
