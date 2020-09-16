@@ -1,5 +1,5 @@
 
-from src.message import *
+from fixwrapper.message import *
 import unittest
 
 class TestMessage(unittest.TestCase):

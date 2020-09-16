@@ -1,7 +1,7 @@
 import os, sys
 path = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(path)
-from src.wrapper import *
+from fixwrapper.wrapper import *
 import unittest
 import re
 

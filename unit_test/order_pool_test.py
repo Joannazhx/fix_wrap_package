@@ -1,6 +1,6 @@
 import sys
 # sys.path.append("..")
-from src.order_pool import *
+from fixwrapper.order_pool import *
 import unittest
 
 class TestOrderPool(unittest.TestCase):
