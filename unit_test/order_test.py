@@ -1,6 +1,6 @@
 import sys
 sys.path.append("..")
-from src.order import *
+from fixwrapper.order import *
 import unittest
 
 class TestOrder(unittest.TestCase):

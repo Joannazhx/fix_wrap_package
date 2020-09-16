@@ -1,4 +1,4 @@
-from src.reader import *
+from fixwrapper.reader import *
 import unittest
 
 class TestReader(unittest.TestCase):
