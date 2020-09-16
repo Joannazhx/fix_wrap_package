@@ -21,10 +21,25 @@ steps:
     versionSpec: '$(python.version)'
   displayName: 'Use Python $(python.version)'
 
-- script: |
+- script: |    
+    pip install pytest pytest-azurepipelines    
+    pytest  
+  displayName: 'pytest'
+
+- script: |    
     python -m pip install --upgrade pip
     pip install setuptools
     pip install wheel
     python setup.py bdist_wheel
-  displayName: 'Install dependencies'
+  displayName: 'Artifact creation'
+
+- task: CopyFiles@2  
+  inputs:    
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1  
+  inputs:    
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'                  
+    ArtifactName: 'dist'    
+    publishLocation: 'Container'
 

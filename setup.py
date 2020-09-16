@@ -1,11 +1,12 @@
 from setuptools import setup
 
 setup(
-        name='fix_wrapper',     # package name
+        name='fix-wrapper',     # package name
         version='1.0',  
         description='This is python package for fix wrapper', 
         url='https://github.com/Joannazhx/FIX_wrapper',  
         author='Joanna',  
+        author_email='joannaunswit@gmail.com',
         packages=['src'],                 
         install_requires=[
             'numpy==1.19.0',
