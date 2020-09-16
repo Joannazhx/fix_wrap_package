@@ -1,13 +1,13 @@
 from setuptools import setup
 
 setup(
-        name='fix-wrapper',     # package name
-        version='1.0',  
+        name='fixwrapper',     # package name
+        version='1.0.0',  
         description='This is python package for fix wrapper', 
         url='https://github.com/Joannazhx/FIX_wrapper',  
         author='Joanna',  
         author_email='joannaunswit@gmail.com',
-        packages=['src'],                 
+        packages=['fixwrapper'],                 
         install_requires=[
             'numpy==1.19.0',
             'pandas==1.1.1',
@@ -23,7 +23,6 @@ setup(
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Build Tools',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.6'
         ]
 )
