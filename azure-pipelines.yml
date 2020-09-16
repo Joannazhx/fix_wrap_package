@@ -26,8 +26,13 @@ steps:
     python setup.py bdist_wheel
   displayName: 'Artifact creation'
 
-- task: PublishBuildArtifacts@1  
-  inputs:    
-    targetPath: $(System.DefaultWorkingDirectory)/dist                 
-    ArtifactName: dist 
+- task: CopyFiles@2
+  inputs:
+    contents: 'dist/**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: dist
 
