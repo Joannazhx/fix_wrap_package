@@ -38,7 +38,9 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    contents: 'dist/**, **.xml'
+    contents: |
+      dist/**
+      **.xml
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
