@@ -28,7 +28,3 @@ steps:
     python setup.py bdist_wheel
   displayName: 'Install dependencies'
 
-- script: |
-    pip install pytest pytest-azurepipelines
-    pytest
-  displayName: 'pytest'
