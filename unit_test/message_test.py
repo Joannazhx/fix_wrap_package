@@ -1,5 +1,9 @@
 
+<<<<<<< HEAD
 from fixwrapper.message import *
+=======
+from src.message import *
+>>>>>>> 47b13e6a5c9952fc79f94b25b28e9a9a287c0386
 import unittest
 
 class TestMessage(unittest.TestCase):

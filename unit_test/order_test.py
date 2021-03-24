@@ -1,6 +1,10 @@
 import sys
 sys.path.append("..")
+<<<<<<< HEAD
 from fixwrapper.order import *
+=======
+from src.order import *
+>>>>>>> 47b13e6a5c9952fc79f94b25b28e9a9a287c0386
 import unittest
 
 class TestOrder(unittest.TestCase):
